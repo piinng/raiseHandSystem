@@ -15,37 +15,46 @@ def on_connect(client, userdata, flags, rc):
 
 # 當接收到從伺服器發送的訊息時要進行的動作
 def on_message(client, userdata, msg):
-    getmsg=json.dumps(str(msg.payload,encoding='utf-8'))
+    getmsg=json.loads(str(msg.payload)[2:-1])
     print(getmsg)
     print(getmsg,type(getmsg))
-    if(getmsg.need=='getAndChangeIDStstus'):
-        if(getmsg.info=='hand'):
-            a="select handStatus from status where ID==\'%s\'"%(getmsg.ID)
+    if(getmsg["need"]=='getAndChangeIDStstus'):
+        print('need')
+        if(getmsg["info"][0]=='hand'):
+            print('hand')
+            a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            if(cursor.fetchone()):
-                a="update status set handStatus=0 where ID == \'%s\'"%(getmsg.ID)
+            if(cursor.fetchone()[0]):
+                a="update status set handStatus=0 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
+                db.commit()
             else:
-                a="update status set handStatus=1 where ID == \'%s\'"%(getmsg.ID)
+                a="update status set handStatus=1 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
-        elif(getmsg.info=='A'):
-            a="select AStatus from status where ID==\'%s\'"%(getmsg.ID)
+                db.commit()
+        elif(getmsg["info"][0]=='A'):
+            a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            if(cursor.fetchone()):
-                a="update status set AStatus=0 where ID == \'%s\'"%(getmsg.ID)
+            
+            if(cursor.fetchone()[0]):
+                a="update status set AStatus=0 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
+                db.commit()
             else:
-                a="update status set AStatus=1 where ID == \'%s\'"%(getmsg.ID)
+                a="update status set AStatus=1 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
-        elif(getmsg.info=='B'):
-            a="select BStatus from status where ID==\'%s\'"%(getmsg.ID)
+                db.commit()
+        elif(getmsg["info"][0]=='B'):
+            a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            if(cursor.fetchone()):
-                a="update status set BStatus=0 where ID == \'%s\'"%(getmsg.ID)
+            if(cursor.fetchone()[0]):
+                a="update status set BStatus=0 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
+                db.commit()
             else:
-                a="update status set BStatus=1 where ID == \'%s\'"%(getmsg.ID)
+                a="update status set BStatus=1 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
+                db.commit()
 
 # 連線設定
 # 初始化地端程式
