@@ -4,6 +4,23 @@ db=sqlite3.connect('lib.db')
 cursor=db.cursor()
 import json
 
+def reuturnReset():
+    for i in range(1,8):
+        a='select * from status where ID=%d'%(i)
+        cursor.execute(a)
+        x=cursor.fetchone()
+        print(x)
+        t={
+            'From':'lib',
+            'to':'teacher',
+            'ID':x[0],
+            'need':'returnReset',
+            'info':x
+        }
+        client.publish("pingHandSystem/MQTT",json.dumps(t))
+        print(json.dumps(t))
+        print(x)
+
 # 當地端程式連線伺服器得到回應時，要做的動作
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
@@ -55,6 +72,67 @@ def on_message(client, userdata, msg):
                 a="update status set BStatus=1 where ID == '%s'"%(getmsg["ID"])
                 cursor.execute(a)
                 db.commit()
+        a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x=[cursor.fetchone()[0],0,0]
+        a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x[1]=cursor.fetchone()[0]
+        a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x[2]=cursor.fetchone()[0]
+        t={
+            'From':'server',
+            'to':'student',
+            'ID':getmsg["ID"],
+            'need':'sendStatus',
+            'info':x
+        }
+        client.publish("pingHandSystem/MQTT",json.dumps(t))
+        reuturnReset()
+
+    if(getmsg["need"]=='rename'):
+        a="update status set name='%s' where ID == '%s'"%(getmsg['info'][0],getmsg["ID"])
+        cursor.execute(a)
+        db.commit()
+        reuturnReset()
+        
+    if(getmsg["need"]=='allRelax'):
+        if(getmsg['info'][0]=='hand'):
+            a="update status set handStatus=0"
+            cursor.execute(a)
+            db.commit()
+        elif(getmsg['info'][0]=='A'):
+            a="update status set AStatus=0"
+            cursor.execute(a)
+            db.commit()
+        elif(getmsg['info'][0]=='B'):
+            a="update status set BStatus=0"
+            cursor.execute(a)
+            db.commit()
+        a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x=[cursor.fetchone()[0],0,0]
+        a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x[1]=cursor.fetchone()[0]
+        a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
+        cursor.execute(a)
+        x[2]=cursor.fetchone()[0]
+        t={
+            'From':'server',
+            'to':'student',
+            'ID':getmsg["ID"],
+            'need':'sendStatus',
+            'info':x
+        }
+        client.publish("pingHandSystem/MQTT",json.dumps(t))
+        reuturnReset()
+        
+    if(getmsg["need"]=='reset'):
+        reuturnReset()
+            #print(type(x[0]))
+        
 
 # 連線設定
 # 初始化地端程式

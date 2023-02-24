@@ -5,10 +5,7 @@ import json
 import datetime 
 import time
 
-IDnum='01'
-handStatus=0
-AStatus=0
-BStatus=0
+IDnum=1
 
 
 def on_connect(client, userdata, flags, rc):
@@ -19,20 +16,25 @@ def on_connect(client, userdata, flags, rc):
     # 地端程式將會重新訂閱
     client.subscribe("pingHandSystem/MQTT")
 
-'''def on_message(client, userdata, msg):
-    if(msg.payload.need=='sendStatus'):
-        if(msg.payload.info[0]):
-            hand_Button.config(background='yellow')
+def on_message(client, userdata, msg):
+    print('getmsg')
+    getmsg=json.loads(str(msg.payload)[2:-1])
+    if(getmsg['need']=='sendStatus'):
+        print('sendStatus')
+        if(getmsg['info'][0]):
+            print('01')
+            hand_Button.config(bg='yellow',text='舉手1')
         else:
-            hand_Button.config(background='gray')
-        if(msg.payload.info[1]):
-            A_Button.config(background='yellow')
+            print('00')
+            hand_Button.config(bg='gray',text='舉手0')
+        if(getmsg['info'][1]):
+            A_Button.config(background='yellow',text='A1')
         else:
-            A_Button.config(background='gray')
-        if(msg.payload.info[2]):
-            B_Button.config(background='yellow')
+            A_Button.config(background='gray',text='A0')
+        if(getmsg['info'][2]):
+            B_Button.config(background='yellow',text='B1')
         else:
-            B_Button.config(background='gray')'''
+            B_Button.config(background='gray',text='B0')
     
 client = mqtt.Client()
 
@@ -40,7 +42,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 
 # 設定接收訊息的動作
-#client.on_message = on_message
+client.on_message = on_message
 
 # 設定登入帳號密碼
 client.username_pw_set("","")
