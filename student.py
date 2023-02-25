@@ -55,6 +55,7 @@ client.connect("test.mosquitto.org", 1883, 60)
 client.loop_start()
 
 def fRename():
+    IDnum=int(ID_entry.get())
     t={
         'From':'student',
         'to':'lib',
@@ -94,9 +95,11 @@ window = tk.Tk()
 window.title('學生端')
 
 #ID、rename
-ID_label=tk.Label(text="ID:%s"%(IDnum))
+ID_label=tk.Label(text="ID:")
+ID_entry=tk.Entry(width=5)
 name_entry=tk.Entry(width=10)
 ID_label.pack(side='left')
+ID_entry.pack(side='left')
 name_entry.pack(side='left')
 rename=tk.Button(text="👣",command=fRename,width=1)
 rename.pack(side='right')
