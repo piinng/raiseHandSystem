@@ -72,11 +72,11 @@ window.title('控制端')
 
 
 #hang
-hand_Button=tk.Button(text="舉手",background='gray',command=fHang)
+hand_Button=tk.Button(text="舉手",background='gray',command=fHang,width=10,height=10,)
 hand_Button.pack(side='left')
-A_Button=tk.Button(text="A",background='gray',command=fA)
+A_Button=tk.Button(text="A",background='gray',command=fA,width=10,height=10)
 A_Button.pack(side='left')
-B_Button=tk.Button(text="B",background='gray',command=fB)
+B_Button=tk.Button(text="B",background='gray',command=fB,width=10,height=10)
 B_Button.pack(side='left')
 
 
