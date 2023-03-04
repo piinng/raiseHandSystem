@@ -38,97 +38,113 @@ def on_message(client, userdata, msg):
     if(getmsg["need"]=='getAndChangeIDStstus'):
         print('need')
         if(getmsg["info"][0]=='hand'):
-            print('hand')
+            try:
+                print('hand')
+                a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
+                cursor.execute(a)
+                if(cursor.fetchone()[0]):
+                    a="update status set handStatus=0 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+                else:
+                    a="update status set handStatus=1 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+            except:
+                pass
+        elif(getmsg["info"][0]=='A'):
+            try:
+                a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
+                cursor.execute(a)
+                
+                if(cursor.fetchone()[0]):
+                    a="update status set AStatus=0 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+                else:
+                    a="update status set AStatus=1 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+            except:
+                pass
+        elif(getmsg["info"][0]=='B'):
+            try:
+                a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
+                cursor.execute(a)
+                if(cursor.fetchone()[0]):
+                    a="update status set BStatus=0 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+                else:
+                    a="update status set BStatus=1 where ID == '%s'"%(getmsg["ID"])
+                    cursor.execute(a)
+                    db.commit()
+            except:
+                pass
+        try:
             a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            if(cursor.fetchone()[0]):
-                a="update status set handStatus=0 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-            else:
-                a="update status set handStatus=1 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-        elif(getmsg["info"][0]=='A'):
+            x=[cursor.fetchone()[0],0,0]
             a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            
-            if(cursor.fetchone()[0]):
-                a="update status set AStatus=0 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-            else:
-                a="update status set AStatus=1 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-        elif(getmsg["info"][0]=='B'):
+            x[1]=cursor.fetchone()[0]
             a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            if(cursor.fetchone()[0]):
-                a="update status set BStatus=0 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-            else:
-                a="update status set BStatus=1 where ID == '%s'"%(getmsg["ID"])
-                cursor.execute(a)
-                db.commit()
-        a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x=[cursor.fetchone()[0],0,0]
-        a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x[1]=cursor.fetchone()[0]
-        a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x[2]=cursor.fetchone()[0]
-        t={
-            'From':'server',
-            'to':'student',
-            'ID':getmsg["ID"],
-            'need':'sendStatus',
-            'info':x
-        }
-        client.publish("pingHandSystem/MQTT",json.dumps(t))
-        reuturnReset()
+            x[2]=cursor.fetchone()[0]
+            t={
+                'From':'server',
+                'to':'student',
+                'ID':getmsg["ID"],
+                'need':'sendStatus',
+                'info':x
+            }
+            client.publish("pingHandSystem/MQTT",json.dumps(t))
+            reuturnReset()
+        except:
+            pass
 
     if(getmsg["need"]=='rename'):
-        a="update status set name='%s' where ID == '%s'"%(getmsg['info'][0],getmsg["ID"])
-        cursor.execute(a)
-        db.commit()
-        reuturnReset()
-        
+        try:
+            a="update status set name='%s' where ID == '%s'"%(getmsg['info'][0],getmsg["ID"])
+            cursor.execute(a)
+            db.commit()
+            reuturnReset()
+        except:
+            pass
     if(getmsg["need"]=='allRelax'):
-        if(getmsg['info'][0]=='hand'):
-            a="update status set handStatus=0"
+        try:
+            if(getmsg['info'][0]=='hand'):
+                a="update status set handStatus=0"
+                cursor.execute(a)
+                db.commit()
+            elif(getmsg['info'][0]=='A'):
+                a="update status set AStatus=0"
+                cursor.execute(a)
+                db.commit()
+            elif(getmsg['info'][0]=='B'):
+                a="update status set BStatus=0"
+                cursor.execute(a)
+                db.commit()
+            a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            db.commit()
-        elif(getmsg['info'][0]=='A'):
-            a="update status set AStatus=0"
+            x=[cursor.fetchone()[0],0,0]
+            a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            db.commit()
-        elif(getmsg['info'][0]=='B'):
-            a="update status set BStatus=0"
+            x[1]=cursor.fetchone()[0]
+            a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
             cursor.execute(a)
-            db.commit()
-        a="select handStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x=[cursor.fetchone()[0],0,0]
-        a="select AStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x[1]=cursor.fetchone()[0]
-        a="select BStatus from status where ID=='%s'"%(getmsg["ID"])
-        cursor.execute(a)
-        x[2]=cursor.fetchone()[0]
-        t={
-            'From':'server',
-            'to':'student',
-            'ID':getmsg["ID"],
-            'need':'sendStatus',
-            'info':x
-        }
-        client.publish("pingHandSystem/MQTT",json.dumps(t))
-        reuturnReset()
-        
+            x[2]=cursor.fetchone()[0]
+            t={
+                'From':'server',
+                'to':'student',
+                'ID':getmsg["ID"],
+                'need':'sendStatus',
+                'info':x
+            }
+            client.publish("pingHandSystem/MQTT",json.dumps(t))
+            reuturnReset()
+        except:
+            pass
     if(getmsg["need"]=='reset'):
         reuturnReset()
             #print(type(x[0]))
