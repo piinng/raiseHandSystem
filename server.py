@@ -5,7 +5,7 @@ cursor=db.cursor()
 import json
 
 def reuturnReset():
-    for i in range(1,8):
+    for i in range(1,31):
         a='select * from status where ID=%d'%(i)
         cursor.execute(a)
         x=cursor.fetchone()
@@ -112,6 +112,7 @@ def on_message(client, userdata, msg):
         except:
             pass
     if(getmsg["need"]=='allRelax'):
+        print("allRelax")
         try:
             if(getmsg['info'][0]=='hand'):
                 a="update status set handStatus=0"

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button List</title>
+</head>
+<body>
+	<ul id="abc">
+		<li><button class="1" onclick="logParentId(this)">1</button></li>
+		<li><button class="2" onclick="logParentId(this)">2</button></li>
+		<li><button class="3" onclick="logParentId(this)">3</button></li>
+	</ul>
+	<script>
+		function logParentId(button) {
+			console.log(button.parentNode.parentNode.id);
+		}
+	</script>
+</body>
+</html>
