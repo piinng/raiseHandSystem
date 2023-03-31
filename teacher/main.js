@@ -34,38 +34,38 @@ client.on('connect', ()=>{
             if(getValue['info'][0]){
                 var heading = document.querySelectorAll(".hand")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".hand")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
             if(getValue['info'][1]){
                 var heading = document.querySelectorAll(".A")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".A")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
             if(getValue['info'][2]){
                 var heading = document.querySelectorAll(".B")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".B")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
         }
         if(getValue['need']=='returnReset'){
@@ -73,38 +73,38 @@ client.on('connect', ()=>{
             if(getValue['info'][2]){
                 var heading = document.querySelectorAll(".hand")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".hand")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
             if(getValue['info'][3]){
                 var heading = document.querySelectorAll(".A")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".A")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
             if(getValue['info'][4]){
                 var heading = document.querySelectorAll(".B")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "yellow";
-                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="yellow"
+			    headingchange.style.backgroundColor = "blue";
+                // document.getElementById(getValue['ID']).getElementsByClassName('hand').backgroundColor="blue"
                 // console.log(document.getElementById(getValue['ID']).getElementsByClassName('hand'))
             }else{
-                // document.getElementById("hand").style.backgroundColor="gray"
+                // document.getElementById("hand").style.backgroundColor="#4CAF50"
                 var heading = document.querySelectorAll(".B")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
-			    headingchange.style.backgroundColor = "gray";
+			    headingchange.style.backgroundColor = "#4CAF50";
             }
             var paras = document.querySelectorAll(".name"); // 选中所有 class 为 my-para 的元素
             for(var i = 0; i < paras.length; i++) {

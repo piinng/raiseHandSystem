@@ -51,19 +51,19 @@ client.on('connect', ()=>{
         getValue=JSON.parse(payload)
         if(getValue['need']=='sendStatus'){
             if(getValue['info'][0]){
-                document.getElementById("hand").style.backgroundColor="yellow"
+                document.getElementById("hand").style.backgroundColor="blue"
             }else{
-                document.getElementById("hand").style.backgroundColor="gray"
+                document.getElementById("hand").style.backgroundColor="#4CAF50"
             }
             if(getValue['info'][1]){
-                document.getElementById("A").style.backgroundColor="yellow"
+                document.getElementById("A").style.backgroundColor="blue"
             }else{
-                document.getElementById("A").style.backgroundColor="gray"
+                document.getElementById("A").style.backgroundColor="#4CAF50"
             }
             if(getValue['info'][2]){
-                document.getElementById("B").style.backgroundColor="yellow"
+                document.getElementById("B").style.backgroundColor="blue"
             }else{
-                document.getElementById("B").style.backgroundColor="gray"
+                document.getElementById("B").style.backgroundColor="#4CAF50"
             }
         }
     });
