@@ -1,3 +1,8 @@
+function playAudio() {
+    const audio = document.createElement("audio");
+    audio.src = "teacher/y1652.mp3";
+    audio.play();
+}
 function isClick(getInfo){
     var getClass=getInfo.getAttribute("class")
     var getID=getInfo.parentNode.id
@@ -31,6 +36,8 @@ client.on('connect', ()=>{
     client.on("message", function (topic, payload) {
         getValue=JSON.parse(payload)
         if(getValue['need']=='sendStatus'){
+            playAudio();
+            console.log("\a")
             if(getValue['info'][0]){
                 var heading = document.querySelectorAll(".hand")
                 var headingchange=heading[parseInt(getValue['ID'])-1]
@@ -69,6 +76,8 @@ client.on('connect', ()=>{
             }
         }
         if(getValue['need']=='returnReset'){
+            playAudio();
+            console.log("\a")
             console.log(getValue)
             if(getValue['info'][2]){
                 var heading = document.querySelectorAll(".hand")
